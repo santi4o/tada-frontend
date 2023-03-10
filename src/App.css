@@ -3,5 +3,9 @@
 }
 
 .shadow1 {
-    box-shadow: rgb(38, 57, 77) 10px 15px 20px -10px;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.shadow1:hover {
+  box-shadow: rgb(38, 57, 77) 8px 8px 16px -10px;
 }
