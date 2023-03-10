@@ -7,5 +7,9 @@
 }
 
 .shadow1:hover {
-  box-shadow: rgb(38, 57, 77) 8px 8px 16px -10px;
+  box-shadow: rgb(38, 57, 77) 2px 8px 20px -6px;
+}
+
+.shadow1:active {
+  box-shadow: none;
 }
