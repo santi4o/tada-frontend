@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-.shadow1 {
+/* .shadow1 {
   transition: box-shadow 0.1s ease-in-out;
 }
 
@@ -12,4 +12,11 @@
 
 .shadow1:active {
   box-shadow: none;
+} */
+/* .inner-shadow1:hover {
+  box-shadow:0 0 1px 1px #102447;
 }
+
+input.inner-shadow1:focus {
+  box-shadow:0 0 1px 1px #102447;
+} */
