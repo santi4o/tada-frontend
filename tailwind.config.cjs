@@ -5,6 +5,7 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
     'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -15,5 +16,5 @@ module.exports = {
   },
   plugins: [
     require('flowbite/plugin')
-]
+  ]
 }
