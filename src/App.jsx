@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import Filters from "./components/Filters";
 import Table from "./components/Table";
 import Button from "./components/shared/Button";
+import PageNav from "./components/PageNav";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -47,6 +48,9 @@ function App() {
                         <Button buttonText="New To Do"></Button>
                     </div>
                     <Table></Table>
+                </div>
+                <div className="mt-4 md:w-5/6 lg:max-w-3xl mx-auto flex justify-center">
+                    <PageNav ></PageNav>
                 </div>
             </Layout>
         </div>
