@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function Layout({ toggleThemeEvent, children }) {
   return (
     <>
-      <nav className="m-2 ring-1 ring-gray-200 bg-white rounded-lg shadow-lg px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+      <nav className="m-1 sm:m-2 ring-1 ring-gray-200 bg-white rounded-lg shadow-lg px-2 sm:px-4 py-2.5 dark:bg-gray-900">
         <div className="container flex flex-wrap items-center justify-between mx-auto">
         <img src="tada-white.svg" className="h-6 mr-3 sm:h-9 dark:hidden" alt="Flowbite Logo" />
         <img src="tada.svg" className="h-6 mr-3 sm:h-9 hidden dark:inline-block" alt="Flowbite Logo" />
@@ -56,7 +56,7 @@ export default function Layout({ toggleThemeEvent, children }) {
         </div>
       </nav>
 
-      <main className="mt-8">{children}</main>
+      <main className="mt-8 p-1 sm:p-2">{children}</main>
     </>
   );
 }
