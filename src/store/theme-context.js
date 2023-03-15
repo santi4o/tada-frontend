@@ -2,7 +2,7 @@ import React from "react";
 
 const ThemeContext = React.createContext({
     dark: false,
-    handleToggleTheme: () => {}
+    handleToggleTheme: () => { }
 });
 
 export default ThemeContext;

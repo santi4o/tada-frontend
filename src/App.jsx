@@ -11,28 +11,30 @@ import { useContext } from "react";
 import ThemeContext from "./store/theme-context";
 
 function App() {
-    const themeContext = useContext(ThemeContext)
-    return (
-        <div className={"App" + (themeContext.dark ? " dark " : " ") + "min-h-screen"}>
-            {/* <div className="dark:bg-black">hola</div> */}
-            <Layout>
-                <TasksProvider>
-                    <div className="md:w-5/6 lg:max-w-3xl mx-auto">
-                        <Filters></Filters>
-                    </div>
-                    <div className="md:w-5/6 lg:max-w-3xl mx-auto">
-                        <div className="my-4">
-                            <Button buttonText="New To Do"></Button>
-                        </div>
-                        <Table tasks={[]}></Table>
-                    </div>
-                    <div className="mt-4 md:w-5/6 lg:max-w-3xl mx-auto flex justify-center">
-                        <PageNav></PageNav>
-                    </div>
-                </TasksProvider>
-            </Layout>
-        </div>
-    );
+  const themeContext = useContext(ThemeContext);
+  return (
+    <div
+      className={"App" + (themeContext.dark ? " dark " : " ") + "min-h-screen"}
+    >
+      {/* <div className="dark:bg-black">hola</div> */}
+      <Layout>
+        <TasksProvider>
+          <div className="md:w-5/6 lg:max-w-3xl mx-auto">
+            <Filters></Filters>
+          </div>
+          <div className="md:w-5/6 lg:max-w-3xl mx-auto">
+            <div className="my-4">
+              <Button buttonText="New To Do"></Button>
+            </div>
+            <Table tasks={[]}></Table>
+          </div>
+          <div className="mt-4 md:w-5/6 lg:max-w-3xl mx-auto flex justify-center">
+            <PageNav></PageNav>
+          </div>
+        </TasksProvider>
+      </Layout>
+    </div>
+  );
 }
 
 export default App;

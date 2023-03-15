@@ -9,9 +9,9 @@ export const TASK_PROPERTIES = [
 ];
 
 export const TASK_TABLE_PROPS = [
-    {value: "done", viewValue: ""},
-    {value: "text", viewValue: "Name", bold: true},
-    {value: "priority", viewValue: "Priority", sortable: true},
-    {value: "dueDate", viewValue: "Due Date", sortable: true}
+    { value: "done", viewValue: "" },
+    { value: "text", viewValue: "Name", bold: true },
+    { value: "priority", viewValue: "Priority", sortable: true },
+    { value: "dueDate", viewValue: "Due Date", sortable: true }
 ]
 
