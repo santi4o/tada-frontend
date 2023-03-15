@@ -26,7 +26,7 @@ function App() {
             <div className="my-4">
               <Button buttonText="New To Do"></Button>
             </div>
-            <Table tasks={[]}></Table>
+            <Table ></Table>
           </div>
           <div className="mt-4 md:w-5/6 lg:max-w-3xl mx-auto flex justify-center">
             <PageNav></PageNav>

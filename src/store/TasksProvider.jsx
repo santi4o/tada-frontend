@@ -1,33 +1,64 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import TasksContext from "./tasks-context";
 
 const defaultTasksState = {
   list: [],
   page: 0,
-  totalPages: 3
-}
+  totalPages: 1,
+  sorting: []
+};
 
 function tasksReducer(state, action) {
-  if (action.type === "CHANGE_PAGE") {
-    const newPage = action.page;
+  if (action.type === "SET_LIST") {
     return {
-      list: state.list,
-      page: newPage,
-      totalPages: 3
+      list: action.list,
+      page: action.page,
+      totalPages: action.totalPages,
+      sorting: state.sorting
     }
   }
   return defaultTasksState;
 }
 
 export default function TasksProvider({ children }) {
-  const [tasksState, dispatchTasksAction] = useReducer(tasksReducer, defaultTasksState);
+  const [tasksState, dispatchTasksAction] = useReducer(
+    tasksReducer,
+    defaultTasksState
+  );
 
   function addTaskHandler(task) {}
   function removeTaskHandler(id) {}
   function updateTaskHandler(id) {}
 
+  useEffect(() => {
+    fetchTasksHandler(0);
+  }, []);
+
+  function fetchTasksHandler(page) {
+    fetch("http://localhost:8080/todos?pageNumber=" + page + "&pageSize=2&sorting=dueDate-ASC,priority-DESC", {
+      method: "GET",
+      mode: "cors",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        dispatchTasksAction({
+          type: "SET_LIST",
+          list: data.content,
+          page: data.number,
+          totalPages: data.totalPages
+        });
+      });
+  }
+
   function handlePageChange(page) {
-    dispatchTasksAction({ type: "CHANGE_PAGE", page });
+    if (page < 0 || page >= tasksState.totalPages) {
+      return;
+    }
+    fetchTasksHandler(page);
+    //dispatchTasksAction({ type: "CHANGE_PAGE", page });
   }
 
   const tasksContext = {
@@ -37,7 +68,7 @@ export default function TasksProvider({ children }) {
     addTask: addTaskHandler,
     removeTask: removeTaskHandler,
     updateTask: updateTaskHandler,
-    changePage: handlePageChange
+    changePage: handlePageChange,
   };
 
   return (
