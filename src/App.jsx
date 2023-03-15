@@ -11,11 +11,11 @@ import { useContext } from "react";
 import ThemeContext from "./store/theme-context";
 
 function App() {
-    const ctx = useContext(ThemeContext)
+    const themeContext = useContext(ThemeContext)
     return (
-        <div className={"App" + (ctx.dark ? " dark " : " ") + "min-h-screen"}>
+        <div className={"App" + (themeContext.dark ? " dark " : " ") + "min-h-screen"}>
             {/* <div className="dark:bg-black">hola</div> */}
-            <Layout toggleThemeEvent={ctx.handleToggleTheme}>
+            <Layout>
                 <TasksProvider>
                     <div className="md:w-5/6 lg:max-w-3xl mx-auto">
                         <Filters></Filters>
