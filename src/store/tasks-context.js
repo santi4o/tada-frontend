@@ -5,10 +5,11 @@ const TasksContext = React.createContext({
     page: 0,
     totalPages: 1,
     sorting: [],
-    addTask: (task) => { },
-    removeTask: (id) => { },
-    updateTask: (id) => { },
-    changePage: (page) => {}
+    addTask: (task) => {},
+    removeTask: (id) => {},
+    updateTask: (id) => {},
+    changePage: (page) => {},
+    updateSorting: (sortBy) => {}
 });
 
 export default TasksContext;
