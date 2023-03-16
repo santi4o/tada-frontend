@@ -3,8 +3,24 @@ import InputText from "./shared/InputText";
 import InputSelect from "./shared/InputSelect";
 import { PRIORITIES } from "../config/priorities";
 import { DONE_STATUS } from "../config/done-status";
+import TasksContext from "../store/tasks-context";
+import { useContext, useRef } from "react";
 
 export default function Filters() {
+  const tasksContext = useContext(TasksContext);
+  const nameInputRef = useRef();
+  const prioritySelectRef = useRef();
+  const statusSelectRef = useRef();
+
+  function handleSearch() {
+    console.log(statusSelectRef.current.value)
+    tasksContext.updateFilters([
+      { property: "name", value: nameInputRef.current.value },
+      { property: "priority", value: prioritySelectRef.current.value },
+      { property: "done", value: statusSelectRef.current.value }      
+    ]);
+  }
+  
   let searchSvg = (
     <path
       strokeLinecap="round"
@@ -23,7 +39,7 @@ export default function Filters() {
               Name
             </label>
             <div className="table-cell w-full">
-              <InputText placeholder="Search for to-dos containing this words"></InputText>
+              <InputText myRef={nameInputRef} placeholder="Search for to-dos containing this words"></InputText>
             </div>
           </div>
           <div className=" table-row">
@@ -32,7 +48,7 @@ export default function Filters() {
             </label>
             <div className="flex">
               <div>
-                <InputSelect id="priority" options={PRIORITIES}></InputSelect>
+                <InputSelect id="priority" options={PRIORITIES} myRef={prioritySelectRef} />
               </div>
             </div>
           </div>
@@ -42,10 +58,10 @@ export default function Filters() {
             </label>
             <div className="flex justify-between items-end">
               <div>
-                <InputSelect id="status" options={DONE_STATUS}></InputSelect>
+                <InputSelect id="status" options={DONE_STATUS} myRef={statusSelectRef} />
               </div>
               <div>
-                <Button buttonText="Search"></Button>
+                <Button buttonText="Search" handleClick={handleSearch}></Button>
               </div>
             </div>
           </div>

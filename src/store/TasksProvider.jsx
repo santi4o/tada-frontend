@@ -6,6 +6,7 @@ const defaultTasksState = {
   page: 0,
   totalPages: 1,
   sorting: [],
+  filters: [],
 };
 
 function tasksReducer(state, action) {
@@ -15,6 +16,7 @@ function tasksReducer(state, action) {
       page: action.page,
       totalPages: action.totalPages,
       sorting: state.sorting,
+      filters: state.filters,
     };
   } else if (action.type === "CHANGE_PAGE") {
     return {
@@ -22,6 +24,7 @@ function tasksReducer(state, action) {
       page: action.page,
       totalPages: state.totalPages,
       sorting: state.sorting,
+      filters: state.filters,
     };
   } else if (action.type === "UPDATE_SORTING") {
     // console.log("updating sorting")
@@ -38,13 +41,26 @@ function tasksReducer(state, action) {
 
     newSorting = newSorting.filter((by) => by.direction !== 0);
 
-    console.log(newSorting);
+    // console.log(newSorting);
 
     return {
       list: state.list,
       page: state.page,
       totalPages: state.totalPages,
       sorting: newSorting,
+      filters: state.filters,
+    };
+  } else if (action.type === "UPDATE_FILTERS") {
+    const newFilters = action.filters.filter(
+      (by) => by.value !== "" && by.value !== "-1"
+    );
+
+    return {
+      list: state.list,
+      page: state.page,
+      totalPages: state.totalPages,
+      sorting: state.sorting,
+      filters: newFilters,
     };
   }
 
@@ -67,15 +83,14 @@ export default function TasksProvider({ children }) {
   function updateTaskHandler(id) {}
 
   useEffect(() => {
-    // console.log("fetching data...")
+    console.log("fetching data...");
+    console.log(tasksState.filters);
     let sortingQueryParams = "&sorting=";
 
     tasksContext.sorting.forEach((by, i) => {
-      if (by.direction) {
-        sortingQueryParams += by.property + "-" + directionDict[by.direction];
-        if (i !== tasksContext.sorting.length - 1) {
-          sortingQueryParams += ",";
-        }
+      sortingQueryParams += by.property + "-" + directionDict[by.direction];
+      if (i !== tasksContext.sorting.length - 1) {
+        sortingQueryParams += ",";
       }
     });
 
@@ -85,6 +100,10 @@ export default function TasksProvider({ children }) {
       "&pageSize=10";
 
     sortingQueryParams != "&sorting=" && (urlReq += sortingQueryParams);
+
+    tasksContext.filters.forEach((by) => {
+      urlReq += "&" + by.property + "=" + by.value;
+    });
     console.log(urlReq);
 
     fetch(urlReq, {
@@ -103,7 +122,7 @@ export default function TasksProvider({ children }) {
           totalPages: data.totalPages,
         });
       });
-  }, [tasksState.sorting, tasksState.page]);
+  }, [tasksState.sorting, tasksState.page, tasksState.filters]);
 
   function handlePageChange(page) {
     if (page < 0 || page >= tasksState.totalPages) {
@@ -114,8 +133,12 @@ export default function TasksProvider({ children }) {
   }
 
   function updateSortingHandler(property) {
-    dispatchTasksAction({ type: "UPDATE_SORTING", property: property });
+    dispatchTasksAction({ type: "UPDATE_SORTING", property });
     //fetchTasks(tasksContext.page);
+  }
+
+  function handleFiltersChange(filters) {
+    dispatchTasksAction({ type: "UPDATE_FILTERS", filters });
   }
 
   const tasksContext = {
@@ -123,11 +146,13 @@ export default function TasksProvider({ children }) {
     page: tasksState.page,
     totalPages: tasksState.totalPages,
     sorting: tasksState.sorting,
+    filters: tasksState.filters,
     addTask: addTaskHandler,
     removeTask: removeTaskHandler,
     updateTask: updateTaskHandler,
     changePage: handlePageChange,
     updateSorting: updateSortingHandler,
+    updateFilters: handleFiltersChange,
   };
 
   return (

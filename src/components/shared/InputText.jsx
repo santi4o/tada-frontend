@@ -1,4 +1,4 @@
-export default function InputText({ label, placeholder }) {
+export default function InputText({ label, placeholder, myRef }) {
   return (
     <div className="flex items-center">
       {label && (
@@ -10,6 +10,7 @@ export default function InputText({ label, placeholder }) {
         </label>
       )}
       <input
+        ref={myRef}
         type="text"
         name="floating_email"
         id="floating_email"
