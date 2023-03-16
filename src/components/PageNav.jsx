@@ -53,7 +53,7 @@ export default function PageNav() {
         <li>
           <a
             className={
-              (tasksContext.page === tasksContext.totalPages - 1
+              ((tasksContext.page === tasksContext.totalPages - 1) || tasksContext.totalPages === 0
                 ? disabled
                 : enabled) + " rounded-r-lg"
             }
