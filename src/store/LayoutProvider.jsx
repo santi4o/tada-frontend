@@ -1,8 +1,9 @@
-import ThemeContext from "./theme-context";
+import LayoutContext from "./layout-context";
 import { useState, useEffect } from "react";
 
-export default function ThemeProvider({ children }) {
+export default function LayoutProvider({ children }) {
   const [darkTheme, setDarkTheme] = useState(false);
+  const [showNewTaskModal, setShowNewTaskModal] = useState(false);
 
   useEffect(() => {
     if (
@@ -27,15 +28,26 @@ export default function ThemeProvider({ children }) {
     }
   }
 
+  function handleSetShowNewTaskModal(show) {
+    setShowNewTaskModal(show);
+  }
+
   if (darkTheme) {
     document.body.style.backgroundColor = "black";
   } else {
     document.body.style.backgroundColor = "white";
   }
 
+  const layoutContext = {
+    dark: darkTheme,
+    showNewTaskModal,
+    handleToggleTheme,
+    setShowNewTaskModal: handleSetShowNewTaskModal
+  }
+
   return (
-    <ThemeContext.Provider value={{ dark: darkTheme, handleToggleTheme }}>
+    <LayoutContext.Provider value={layoutContext}>
       {children}
-    </ThemeContext.Provider>
+    </LayoutContext.Provider>
   );
 }
