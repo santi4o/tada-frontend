@@ -42,11 +42,11 @@ export default function Filters() {
               <InputText myRef={nameInputRef} placeholder="Search for to-dos containing this words"></InputText>
             </div>
           </div>
-          <div className=" table-row">
+          <div className="table-row">
             <label className="table-cell pr-2" htmlFor="">
               Priority
             </label>
-            <div className="flex">
+            <div className="flex my-2">
               <div>
                 <InputSelect id="priority" options={PRIORITIES} myRef={prioritySelectRef} />
               </div>

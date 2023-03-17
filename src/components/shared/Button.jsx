@@ -1,6 +1,5 @@
 export default function Button({ buttonText, handleClick }) {
   return (
-    <>
       <button
         href="#_"
         className="relative inline-block px-4 py-2 font-medium group"
@@ -14,6 +13,5 @@ export default function Button({ buttonText, handleClick }) {
           <p className="group-active:multicolortext0">{buttonText}</p>
         </span>
       </button>
-    </>
   );
 }

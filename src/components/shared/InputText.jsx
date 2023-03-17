@@ -14,7 +14,7 @@ export default function InputText({ label, placeholder, myRef }) {
         type="text"
         name="floating_email"
         id="floating_email"
-        className="block rounded-md w-full py-2.5 pr-2 text-sm text-gray-900 bg-transparent border border-gray-500 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-black focus:border-black  focus:placeholder-gray-500 peer"
+        className="block rounded-md w-full py-2.5 pr-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-black focus:border-black  focus:placeholder-gray-500 peer"
         placeholder={placeholder}
         required
       />
