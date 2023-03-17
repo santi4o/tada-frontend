@@ -5,32 +5,34 @@ import Table from "./components/Table";
 import Button from "./components/shared/Button";
 import PageNav from "./components/PageNav";
 import TasksProvider from "./store/TasksProvider";
-
-import { TEST_DATA } from "./mock/mock-data.js";
+import NewTaskModal from "./components/NewTaskModal";
 import { useContext } from "react";
-import ThemeContext from "./store/theme-context";
+import LayoutContext from "./store/layout-context";
 
 function App() {
-  const themeContext = useContext(ThemeContext);
+  const layoutContext = useContext(LayoutContext);
+
   return (
-    <div
-      className={"App" + (themeContext.dark ? " dark " : " ") + "min-h-screen"}
-    >
+    <div className={"App" + (layoutContext.dark ? " dark " : " ")}>
       {/* <div className="dark:bg-black">hola</div> */}
       <Layout>
         <TasksProvider>
           <div className="md:w-5/6 lg:max-w-3xl mx-auto">
-            <Filters></Filters>
+            <Filters />
           </div>
           <div className="md:w-5/6 lg:max-w-3xl mx-auto">
             <div className="my-4">
-              <Button buttonText="New To Do"></Button>
+              <Button
+                buttonText="New To-Do"
+                handleClick={() => layoutContext.setShowNewTaskModal(true)}
+              />
             </div>
-            <Table ></Table>
+            <Table />
           </div>
           <div className="mt-4 md:w-5/6 lg:max-w-3xl mx-auto flex justify-center">
-            <PageNav></PageNav>
+            <PageNav />
           </div>
+          {layoutContext.showNewTaskModal && <NewTaskModal />}
         </TasksProvider>
       </Layout>
     </div>
