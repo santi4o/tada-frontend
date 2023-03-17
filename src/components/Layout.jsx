@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import ThemeContext from "../store/theme-context";
+import LayoutContext from "../store/layout-context";
 
 export default function Layout({ children }) {
-  const themeContext = useContext(ThemeContext);
+  const layoutContext = useContext(LayoutContext);
 
   return (
     <>
@@ -23,7 +23,7 @@ export default function Layout({ children }) {
             <button
               id="theme-toggle"
               type="button"
-              onClick={() => themeContext.handleToggleTheme()}
+              onClick={() => layoutContext.handleToggleTheme()}
               className="md:mr-6 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
             >
               <svg
