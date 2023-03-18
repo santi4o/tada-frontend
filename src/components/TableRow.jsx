@@ -71,9 +71,13 @@ export default function TableRow({ task }) {
       <th
         key={prop.value}
         scope="row"
-        className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        className="px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white"
       >
-        {cellValue}
+        {/* {cellValue.length > 50 ? cellValue.slice(0,50) + " ..." : cellValue}<br></br>
+        hola */}
+        <p className="">
+          {cellValue}
+        </p>
       </th>
     ) : (
       <td key={prop.value} className="px-4 py-4">
