@@ -13,7 +13,7 @@ export default function Filters() {
   const statusSelectRef = useRef();
 
   function handleSearch() {
-    console.log(statusSelectRef.current.value)
+    // console.log(statusSelectRef.current.value)
     tasksContext.updateFilters([
       { property: "name", value: nameInputRef.current.value },
       { property: "priority", value: prioritySelectRef.current.value },

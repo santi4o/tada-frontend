@@ -57,7 +57,7 @@ function tasksReducer(state, action) {
 
     return {
       list: state.list,
-      page: state.page,
+      page: 0,
       totalPages: state.totalPages,
       sorting: state.sorting,
       filters: newFilters,
