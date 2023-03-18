@@ -13,8 +13,8 @@
     "flowbite": "^1.6.4",
     "flowbite-react": "^0.4.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-tailwindcss-datepicker": "^1.5.1"
+    "react-datepicker": "^4.10.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
