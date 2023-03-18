@@ -6,7 +6,7 @@ export default function TableRow({ task }) {
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       {TASK_TABLE_PROPS.map((prop) => genCell(prop, task[prop.value]))}
       <td className="px-4 py-4 align-middle">
-        <div className="flex">
+        <div className="flex justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5 fill-gray-600 cursor-pointer mr-3 hover:fill-black"

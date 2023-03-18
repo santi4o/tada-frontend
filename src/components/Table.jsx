@@ -12,7 +12,7 @@ export default function Table() {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             {TASK_TABLE_PROPS.map((prop) => (
-              <th key={prop.value} scope="col" className="px-4 py-3">
+              <th key={prop.value} scope="col" className={"px-4 py-3" + (prop.value==="text" ? " w-full" : "")}>
                 <a
                   className={
                     "flex items-center w-fit" +
