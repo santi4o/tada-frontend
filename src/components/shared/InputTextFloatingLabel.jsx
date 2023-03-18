@@ -2,7 +2,8 @@ export default function InputTextFloatingLabel({
   label,
   placeholder,
   iconPath,
-  myRef
+  myRef,
+  onChange
 }) {
   return (
     <div className="relative z-0 group">
@@ -25,6 +26,7 @@ export default function InputTextFloatingLabel({
         name="floating-label-input"
         id="floating-label-input"
         ref={myRef}
+        onChange={onChange}
         className={
           (iconPath ? "pl-10 " : " ") +
           "block rounded-md w-full py-2.5 pr-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-black focus:border-black placeholder-transparent focus:placeholder-gray-500 peer"

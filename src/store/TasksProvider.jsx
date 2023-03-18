@@ -78,13 +78,20 @@ export default function TasksProvider({ children }) {
     2: "DESC",
   };
 
-  function addTaskHandler(task) {}
   function removeTaskHandler(id) {}
   function updateTaskHandler(id) {}
 
   useEffect(() => {
+    fetchData();
+  }, [
+    tasksState.sorting,
+    tasksState.page,
+    tasksState.filters,
+  ]);
+
+  function fetchData() {
     console.log("fetching data...");
-    console.log(tasksState.filters);
+    // console.log(tasksState.filters);
     let sortingQueryParams = "&sorting=";
 
     tasksContext.sorting.forEach((by, i) => {
@@ -122,7 +129,7 @@ export default function TasksProvider({ children }) {
           totalPages: data.totalPages,
         });
       });
-  }, [tasksState.sorting, tasksState.page, tasksState.filters]);
+  }
 
   function handlePageChange(page) {
     if (page < 0 || page >= tasksState.totalPages) {
@@ -141,13 +148,33 @@ export default function TasksProvider({ children }) {
     dispatchTasksAction({ type: "UPDATE_FILTERS", filters });
   }
 
+  function handleAddTask(task) {
+    let urlReq = "http://localhost:8080/todos";
+    // console.log(task.dueDate);
+    fetch(urlReq, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(task),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        fetchData();
+      });
+  }
+
   const tasksContext = {
     list: tasksState.list,
     page: tasksState.page,
     totalPages: tasksState.totalPages,
     sorting: tasksState.sorting,
     filters: tasksState.filters,
-    addTask: addTaskHandler,
+    addTask: handleAddTask,
     removeTask: removeTaskHandler,
     updateTask: updateTaskHandler,
     changePage: handlePageChange,
