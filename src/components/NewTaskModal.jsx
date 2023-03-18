@@ -65,6 +65,7 @@ function NewTaskForm() {
         onChange={handleNameChange}
         label="Name"
         placeholder="A magic To-Do 🌟"
+        maxLength={100}
       />
       <div className="flex mt-4 items-end justify-start">
         <div className="flex flex-col mr-2">

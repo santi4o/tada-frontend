@@ -3,7 +3,8 @@ export default function InputTextFloatingLabel({
   placeholder,
   iconPath,
   myRef,
-  onChange
+  onChange,
+  maxLength
 }) {
   return (
     <div className="relative z-0 group">
@@ -32,6 +33,7 @@ export default function InputTextFloatingLabel({
           "block rounded-md w-full py-2.5 pr-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-black focus:border-black placeholder-transparent focus:placeholder-gray-500 peer"
         }
         placeholder={placeholder}
+        maxLength={maxLength || 200}
         required
       />
       <label
