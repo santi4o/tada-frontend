@@ -22,11 +22,12 @@ export default function TaskForm() {
 
   useEffect(() => {
     if (!layoutContext.updatingTask) {
-        return;
+      return;
     }
     nameInputRef.current.value = layoutContext.updatingTask.text;
     prioritySelectRef.current.value = layoutContext.updatingTask.priority;
-    layoutContext.updatingTask.dueDate && setDueDate(new Date(layoutContext.updatingTask.dueDate));
+    layoutContext.updatingTask.dueDate &&
+      setDueDate(new Date(layoutContext.updatingTask.dueDate));
   }, []);
 
   function handleNameChange() {

@@ -8,7 +8,9 @@ const TasksContext = React.createContext({
     filters: [],
     addTask: (task) => {},
     removeTask: (id) => {},
-    updateTask: (id) => {},
+    updateTask: (task) => {},
+    markTaskAsDone: (id) => {},
+    markTaskAsPending: (id) => {},
     changePage: (page) => {},
     updateSorting: (sortBy) => {},
     updateFilters: (filters) => {}

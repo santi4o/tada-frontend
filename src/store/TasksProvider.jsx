@@ -183,6 +183,44 @@ export default function TasksProvider({ children }) {
       });
   }
 
+  function handleMarkTaskAsDone(id) {
+    let urlReq = "http://localhost:8080/todos/" + id + "/done"
+    // console.log(task.dueDate);
+    fetch(urlReq, {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        fetchData();
+      });
+  }
+
+  function handleMarkTaskAsPending(id) {
+    let urlReq = "http://localhost:8080/todos/" + id + "/undone"
+    // console.log(task.dueDate);
+    fetch(urlReq, {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        fetchData();
+      });
+  }
+
   const tasksContext = {
     list: tasksState.list,
     page: tasksState.page,
@@ -192,6 +230,8 @@ export default function TasksProvider({ children }) {
     addTask: handleAddTask,
     removeTask: removeTaskHandler,
     updateTask: handleUpdateTask,
+    markTaskAsDone: handleMarkTaskAsDone,
+    markTaskAsPending: handleMarkTaskAsPending,
     changePage: handlePageChange,
     updateSorting: updateSortingHandler,
     updateFilters: handleFiltersChange,
