@@ -78,8 +78,6 @@ export default function TasksProvider({ children }) {
     2: "DESC",
   };
 
-  function removeTaskHandler(id) {}
-
   useEffect(() => {
     fetchData();
   }, [tasksState.sorting, tasksState.page, tasksState.filters]);
@@ -184,14 +182,14 @@ export default function TasksProvider({ children }) {
   }
 
   function handleMarkTaskAsDone(id) {
-    let urlReq = "http://localhost:8080/todos/" + id + "/done"
+    let urlReq = "http://localhost:8080/todos/" + id + "/done";
     // console.log(task.dueDate);
     fetch(urlReq, {
       method: "PATCH",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     })
       .then((response) => {
         return response.json();
@@ -203,14 +201,33 @@ export default function TasksProvider({ children }) {
   }
 
   function handleMarkTaskAsPending(id) {
-    let urlReq = "http://localhost:8080/todos/" + id + "/undone"
+    let urlReq = "http://localhost:8080/todos/" + id + "/undone";
     // console.log(task.dueDate);
     fetch(urlReq, {
       method: "PATCH",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-      }
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        fetchData();
+      });
+  }
+
+  function handleRemoveTask(id) {
+    let urlReq = "http://localhost:8080/todos/" + id;
+    // console.log(task.dueDate);
+    fetch(urlReq, {
+      method: "DELETE",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((response) => {
         return response.json();
@@ -228,7 +245,7 @@ export default function TasksProvider({ children }) {
     sorting: tasksState.sorting,
     filters: tasksState.filters,
     addTask: handleAddTask,
-    removeTask: removeTaskHandler,
+    removeTask: handleRemoveTask,
     updateTask: handleUpdateTask,
     markTaskAsDone: handleMarkTaskAsDone,
     markTaskAsPending: handleMarkTaskAsPending,
