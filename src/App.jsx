@@ -5,7 +5,7 @@ import Table from "./components/Table";
 import Button from "./components/shared/Button";
 import PageNav from "./components/PageNav";
 import TasksProvider from "./store/TasksProvider";
-import NewTaskModal from "./components/NewTaskModal";
+import TaskModal from "./components/TaskModal";
 import { useContext } from "react";
 import LayoutContext from "./store/layout-context";
 
@@ -24,7 +24,7 @@ function App() {
             <div className="my-4">
               <Button
                 buttonText="New To-Do"
-                handleClick={() => layoutContext.setShowNewTaskModal(true)}
+                handleClick={() => layoutContext.doShowTaskModal()}
               />
             </div>
             <Table />
@@ -32,7 +32,7 @@ function App() {
           <div className="mt-4 md:w-5/6 lg:max-w-3xl mx-auto flex justify-center">
             <PageNav />
           </div>
-          {layoutContext.showNewTaskModal && <NewTaskModal />}
+          {layoutContext.showTaskModal && <TaskModal />}
         </TasksProvider>
       </Layout>
     </div>

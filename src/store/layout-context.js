@@ -2,9 +2,11 @@ import React from "react";
 
 const LayoutContext = React.createContext({
     dark: false,
-    showNewTaskModal: false,
+    showTaskModal: false,
+    updatingTask: null,
     handleToggleTheme: () => {},
-    setShowNewTaskModal: (show) => {}
+    doShowTaskModal: (task) => {},
+    hideTaskModal: () => {}
 });
 
 export default LayoutContext;

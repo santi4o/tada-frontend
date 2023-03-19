@@ -79,15 +79,10 @@ export default function TasksProvider({ children }) {
   };
 
   function removeTaskHandler(id) {}
-  function updateTaskHandler(id) {}
 
   useEffect(() => {
     fetchData();
-  }, [
-    tasksState.sorting,
-    tasksState.page,
-    tasksState.filters,
-  ]);
+  }, [tasksState.sorting, tasksState.page, tasksState.filters]);
 
   function fetchData() {
     console.log("fetching data...");
@@ -155,7 +150,27 @@ export default function TasksProvider({ children }) {
       method: "POST",
       mode: "cors",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        fetchData();
+      });
+  }
+
+  function handleUpdateTask(task) {
+    let urlReq = "http://localhost:8080/todos/" + task.id;
+    // console.log(task.dueDate);
+    fetch(urlReq, {
+      method: "PUT",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(task),
     })
@@ -176,7 +191,7 @@ export default function TasksProvider({ children }) {
     filters: tasksState.filters,
     addTask: handleAddTask,
     removeTask: removeTaskHandler,
-    updateTask: updateTaskHandler,
+    updateTask: handleUpdateTask,
     changePage: handlePageChange,
     updateSorting: updateSortingHandler,
     updateFilters: handleFiltersChange,

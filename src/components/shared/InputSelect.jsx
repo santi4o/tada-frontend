@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export default function InputSelect({ options, label, id, myRef }) {
   return (
     <div className="w-full">
