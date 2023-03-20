@@ -6,6 +6,7 @@ const TasksContext = React.createContext({
     totalPages: 1,
     sorting: [],
     filters: [],
+    statistics: [],
     addTask: (task) => {},
     removeTask: (id) => {},
     updateTask: (task) => {},

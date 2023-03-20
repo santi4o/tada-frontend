@@ -1,12 +1,13 @@
 import { useContext } from "react";
+import Stats from "./Stats";
 import LayoutContext from "../store/layout-context";
 
 export default function Layout({ children }) {
   const layoutContext = useContext(LayoutContext);
 
   return (
-    <>
-      <nav className="m-1 sm:m-2 ring-1 ring-gray-200 bg-white rounded-lg shadow-lg px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+    <div className="border border-transparent flex flex-col h-screen"> 
+      <nav className="sm:m-2 ring-1 ring-gray-200 bg-white rounded-lg shadow-lg px-2 sm:px-4 py-2.5 dark:bg-gray-900">
         <div className="container flex flex-wrap items-center justify-between mx-auto">
           <img
             src="tada-white.svg"
@@ -60,7 +61,8 @@ export default function Layout({ children }) {
         </div>
       </nav>
 
-      <main className="mt-8 p-1 sm:p-2">{children}</main>
-    </>
+      <main className="mt-8 p-1 sm:p-2 grow">{children}</main>
+      <Stats />
+    </div>
   );
 }

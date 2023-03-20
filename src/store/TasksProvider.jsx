@@ -7,6 +7,7 @@ const defaultTasksState = {
   totalPages: 1,
   sorting: [],
   filters: [],
+  statistics: []
 };
 
 function tasksReducer(state, action) {
@@ -17,6 +18,7 @@ function tasksReducer(state, action) {
       totalPages: action.totalPages,
       sorting: state.sorting,
       filters: state.filters,
+      statistics: action.statistics
     };
   } else if (action.type === "CHANGE_PAGE") {
     return {
@@ -25,6 +27,7 @@ function tasksReducer(state, action) {
       totalPages: state.totalPages,
       sorting: state.sorting,
       filters: state.filters,
+      statistics: state.statistics
     };
   } else if (action.type === "UPDATE_SORTING") {
     // console.log("updating sorting")
@@ -49,6 +52,7 @@ function tasksReducer(state, action) {
       totalPages: state.totalPages,
       sorting: newSorting,
       filters: state.filters,
+      statistics: state.statistics
     };
   } else if (action.type === "UPDATE_FILTERS") {
     const newFilters = action.filters.filter(
@@ -61,6 +65,7 @@ function tasksReducer(state, action) {
       totalPages: state.totalPages,
       sorting: state.sorting,
       filters: newFilters,
+      statistics: state.statistics
     };
   }
 
@@ -117,9 +122,10 @@ export default function TasksProvider({ children }) {
         // console.log(data);
         dispatchTasksAction({
           type: "SET_LIST",
-          list: data.content,
-          page: data.number,
-          totalPages: data.totalPages,
+          list: data.page.content,
+          page: data.page.number,
+          totalPages: data.page.totalPages,
+          statistics: data.statistics
         });
       });
   }
@@ -244,6 +250,7 @@ export default function TasksProvider({ children }) {
     totalPages: tasksState.totalPages,
     sorting: tasksState.sorting,
     filters: tasksState.filters,
+    statistics: tasksState.statistics,
     addTask: handleAddTask,
     removeTask: handleRemoveTask,
     updateTask: handleUpdateTask,

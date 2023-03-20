@@ -15,8 +15,8 @@ function App() {
   return (
     <div className={"App" + (layoutContext.dark ? " dark " : " ")}>
       {/* <div className="dark:bg-black">hola</div> */}
-      <Layout>
-        <TasksProvider>
+      <TasksProvider>
+        <Layout>
           <div className="md:w-5/6 lg:max-w-3xl mx-auto">
             <Filters />
           </div>
@@ -33,8 +33,8 @@ function App() {
             <PageNav />
           </div>
           {layoutContext.showTaskModal && <TaskModal />}
-        </TasksProvider>
-      </Layout>
+        </Layout>
+      </TasksProvider>
     </div>
   );
 }
