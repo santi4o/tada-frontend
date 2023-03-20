@@ -61,7 +61,7 @@ export default function Layout({ children }) {
         </div>
       </nav>
 
-      <main className="mt-8 p-1 sm:p-2 grow">{children}</main>
+      <main className="mt-0 p-1 sm:p-2 grow">{children}</main>
       <Stats />
     </div>
   );
