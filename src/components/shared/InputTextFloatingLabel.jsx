@@ -24,8 +24,8 @@ export default function InputTextFloatingLabel({
       )}
       <input
         type="text"
-        name="floating-label-input"
-        id="floating-label-input"
+        name={label}
+        id={label}
         ref={myRef}
         onChange={onChange}
         className={
