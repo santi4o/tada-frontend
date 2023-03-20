@@ -2,7 +2,7 @@ export default function Button({ buttonText, handleClick }) {
   return (
       <button
         href="#_"
-        className="relative inline-block px-4 py-2 font-medium group"
+        className="relative inline-block px-4 py-2 font-medium group w-full sm:w-fit"
         onClick={() => handleClick()}
       >
         <span className="absolute rounded-lg inset-0 w-full h-full transition duration-100 ease-in transform translate-x-1 translate-y-1 bg-magenta1 group-hover:translate-x-0 group-hover:-translate-y-1 group-active:translate-y-0"></span>

@@ -47,7 +47,7 @@ export default function Filters() {
               Priority
             </label>
             <div className="flex my-2">
-              <div>
+              <div className="w-full sm:w-fit">
                 <InputSelect id="priority" options={PRIORITIES} myRef={prioritySelectRef} />
               </div>
             </div>
@@ -56,11 +56,11 @@ export default function Filters() {
             <label className="table-cell w-8" htmlFor="">
               Status
             </label>
-            <div className="flex justify-between items-end">
+            <div className="flex flex-col sm:flex-row justify-between md:items-end">
               <div>
                 <InputSelect id="status" options={DONE_STATUS} myRef={statusSelectRef} />
               </div>
-              <div>
+              <div className="mt-2 sm:mt-0 bg-yellow-200">
                 <Button buttonText="Search" handleClick={handleSearch}></Button>
               </div>
             </div>
