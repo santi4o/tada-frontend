@@ -51,22 +51,25 @@ export default function TaskForm() {
       setClickedAdd(true);
       return;
     }
+    
+    let newDueDate = dueDate ? new Date(dueDate) : null;
+    newDueDate && newDueDate.setHours(0, 0, 0, 0);
 
     if (layoutContext.updatingTask) {
       tasksContext.updateTask({
         id: layoutContext.updatingTask.id,
         text: nameInputRef.current.value,
         priority: prioritySelectRef.current.value,
-        dueDate: dueDate
-          ? new Date(dueDate).toISOString().replace("Z", "CST")
+        dueDate: newDueDate
+          ? new Date(newDueDate).toISOString().replace("Z", "CST")
           : null,
       });
     } else {
       tasksContext.addTask({
         text: nameInputRef.current.value,
         priority: prioritySelectRef.current.value,
-        dueDate: dueDate
-          ? new Date(dueDate).toISOString().replace("Z", "CST")
+        dueDate: newDueDate
+          ? new Date(newDueDate).toISOString().replace("Z", "CST")
           : null,
       });
     }
@@ -105,6 +108,7 @@ export default function TaskForm() {
               <DatePicker
                 selected={dueDate}
                 onChange={(date) => setDueDate(date)}
+                todayButton="Today"
                 dateFormat="yyyy/MM/dd"
                 placeholderText="YYYY/MM/DD"
                 calendarContainer={MyContainer}

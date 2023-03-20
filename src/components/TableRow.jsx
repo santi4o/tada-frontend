@@ -42,6 +42,18 @@ export default function TableRow({ task }) {
     return value ? format(new Date(value), "yyyy/MM/dd") : "";
   }
 
+  function calcWeeksUntilDueDate() {
+    if (!task.dueDate) {
+      return null;
+    }
+    let now = new Date();
+    now.setHours(0, 0, 0, 0);
+    let dueDate = new Date(task.dueDate);
+    dueDate.setHours(0, 0, 0, 0);
+    const seconds = (dueDate.getTime() - now.getTime()) / 1000;
+    return seconds / 604800;
+  }
+
   function genCell(prop, value) {
     const PROP_RENDER = {
       done: genCheckBox,
@@ -52,12 +64,20 @@ export default function TableRow({ task }) {
     const cellValue =
       prop.value in PROP_RENDER ? PROP_RENDER[prop.value](value) : value;
 
+    const weeks = calcWeeksUntilDueDate();
+
     return prop.bold ? (
       <th
         key={prop.value}
         scope="row"
-        className="px-4 py-4 font-medium text-gray-900 whitespace-normal dark:text-white"
+        className="px-4 py-4 font-medium text-gray-900 dark:text-white flex items-center"
       >
+        <div
+          className={
+            "block rounded-full  w-2 h-2 pr-2 mr-2" +
+            ((weeks && !task.done) ? (weeks <= 1 ? " bg-red-500" : (weeks <= 2 ? " bg-yellow-300" : " bg-green-300")) : " hidden")
+          }
+        ></div>
         {/* {cellValue.length > 50 ? cellValue.slice(0,50) + " ..." : cellValue}<br></br>
         hola */}
         <p className="">{cellValue}</p>

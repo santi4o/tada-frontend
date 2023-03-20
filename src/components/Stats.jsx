@@ -17,7 +17,6 @@ export default function Stats() {
     (stat) => stat.name === "avg high"
   );
 
-  console.log(tasksContext.statistics);
   return (
     <div className="m-1 sm:m-2 ring-1 ring-gray-200 bg-white rounded-lg shadow-lg px-2 sm:px-4 py-2.5 dark:bg-gray-900 flex justify-around text-sm text-gray-700">
       <div className="p-2 flex flex-col">
