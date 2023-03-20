@@ -31,9 +31,9 @@ function DateInput({ value, onClick, onClear }, ref) {
       />
       <button
         onClick={onClear}
-        className="text-white absolute rounded-md rounded-l-none right-0 bottom-0 bg-blue-700 hover:bg-blue-800 border border-gray-300 focus:outline-none font-medium text-sm px-4 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="text-white absolute rounded-md rounded-l-none right-0 bottom-0 bg-black hover:bg-blue-800 border border-gray-300 focus:outline-none font-medium text-sm px-4 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
-        X
+        Clear
       </button>
     </div>
   );

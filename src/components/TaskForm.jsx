@@ -51,7 +51,7 @@ export default function TaskForm() {
       setClickedAdd(true);
       return;
     }
-    
+
     let newDueDate = dueDate ? new Date(dueDate) : null;
     newDueDate && newDueDate.setHours(0, 0, 0, 0);
 
@@ -85,8 +85,8 @@ export default function TaskForm() {
         placeholder="A magic To-Do 🌟"
         maxLength={100}
       />
-      <div className="flex mt-4 items-end justify-start">
-        <div className="flex flex-col mr-2">
+      <div className="flex mt-3 sm:mt-4 sm:items-end justify-start flex-col sm:flex-row">
+        <div className="flex sm:mr-2">
           <InputSelect
             myRef={prioritySelectRef}
             id="priority"
@@ -95,8 +95,8 @@ export default function TaskForm() {
           />
         </div>
 
-        <div className="flex justify-between items-end flex-grow">
-          <div className="flex flex-col">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-end flex-grow">
+          <div className="flex my-3 sm:my-0 flex-col">
             <label
               className={
                 "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -104,23 +104,21 @@ export default function TaskForm() {
             >
               Due Date
             </label>
-            <div className="flex">
-              <DatePicker
-                selected={dueDate}
-                onChange={(date) => setDueDate(date)}
-                todayButton="Today"
-                dateFormat="yyyy/MM/dd"
-                placeholderText="YYYY/MM/DD"
-                calendarContainer={MyContainer}
-                customInput={
-                  <DateInput
-                    onClear={() => {
-                      setDueDate(null);
-                    }}
-                  />
-                }
-              />
-            </div>
+            <DatePicker
+              selected={dueDate}
+              onChange={(date) => setDueDate(date)}
+              todayButton="Today"
+              dateFormat="yyyy/MM/dd"
+              placeholderText="YYYY/MM/DD"
+              calendarContainer={MyContainer}
+              customInput={
+                <DateInput
+                  onClear={() => {
+                    setDueDate(null);
+                  }}
+                />
+              }
+            />
           </div>
           <Button
             buttonText={layoutContext.updatingTask ? "Save changes" : "Add"}
