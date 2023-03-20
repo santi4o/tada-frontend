@@ -12,12 +12,10 @@ export default function Layout({ children }) {
           <img
             src="tada-white.svg"
             className="h-6 mr-3 sm:h-9 dark:hidden"
-            alt="Flowbite Logo"
           />
           <img
             src="tada.svg"
             className="h-6 mr-3 sm:h-9 hidden dark:inline-block"
-            alt="Flowbite Logo"
           />
 
           <div className="flex items-center md:w-auto" id="navbar-default">
