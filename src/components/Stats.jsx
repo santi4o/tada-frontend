@@ -18,7 +18,7 @@ export default function Stats() {
   );
 
   return (
-    <div className="m-1 sm:m-2 ring-1 ring-gray-200 bg-white rounded-lg shadow-lg px-2 sm:px-4 py-2.5 dark:bg-gray-900 flex justify-around text-sm text-gray-700">
+    <div className="m-1 sm:m-2 ring-1 ring-gray-200 bg-white rounded-lg shadow-lg px-2 sm:px-4 py-2.5 dark:bg-gray-700 dark:ring-0 flex justify-around text-sm text-gray-700 dark:text-gray-300">
       <div className="p-2 flex flex-col">
         <p className="mb-2">Average time to finish tasks:</p>
         <div className="grow flex justify-center items-center">

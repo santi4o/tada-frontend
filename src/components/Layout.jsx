@@ -7,7 +7,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="border border-transparent flex flex-col h-screen"> 
-      <nav className="sm:m-2 ring-1 ring-gray-200 bg-white rounded-lg shadow-lg px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+      <nav className="sm:m-2 ring-1 ring-gray-200 bg-white rounded-lg shadow-lg px-2 sm:px-4 py-2.5 dark:bg-gray-700 dark:ring-0">
         <div className="container flex flex-wrap items-center justify-between mx-auto">
           <img
             src="tada-white.svg"
@@ -50,13 +50,6 @@ export default function Layout({ children }) {
                 />
               </svg>
             </button>
-
-            <a
-              href="#"
-              className="text-sm font-medium block pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-            >
-              About
-            </a>
           </div>
         </div>
       </nav>

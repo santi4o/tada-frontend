@@ -67,7 +67,7 @@ function genSvgIcon(sorting, prop) {
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="w-3 h-3 ml-1 fill-green"
+        className={"w-3 h-3 ml-1" + (propSortingIndex !== -1 ? " fill-black dark:fill-white" : " fill-gray-500 dark:fill-gray-400")}
         aria-hidden="true"
         // fill="currentColor"
         viewBox="0 0 320 512"
