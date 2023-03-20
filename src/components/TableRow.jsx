@@ -75,12 +75,12 @@ export default function TableRow({ task }) {
         <div
           className={
             "block rounded-full  w-2 h-2 pr-2 mr-2" +
-            ((weeks && !task.done) ? (weeks <= 1 ? " bg-red-500" : (weeks <= 2 ? " bg-yellow-300" : " bg-green-300")) : " hidden")
+            ((weeks != null && !task.done) ? (weeks <= 1 ? " bg-red-500" : (weeks <= 2 ? " bg-yellow-300" : " bg-green-300")) : " hidden")
           }
         ></div>
         {/* {cellValue.length > 50 ? cellValue.slice(0,50) + " ..." : cellValue}<br></br>
         hola */}
-        <p className="">{cellValue}</p>
+        <p className={task.done ? "line-through" : ""}>{cellValue}</p>
       </th>
     ) : (
       <td key={prop.value} className="px-4 py-4">
