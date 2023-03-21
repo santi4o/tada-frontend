@@ -35,7 +35,7 @@ export default function LayoutProvider({ children }) {
   }, []);
 
   function handleToggleTheme() {
-    console.log("hola");
+    //console.log("hola");
     if (darkTheme) {
       localStorage.setItem("color-theme", "light");
       setDarkTheme(false);
