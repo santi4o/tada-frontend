@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from "react";
 import TasksContext from "./tasks-context";
+import { API_ADDRESS, PORT, CORS_MODE } from "../config/api";
 
 const defaultTasksState = {
   list: [],
@@ -7,7 +8,7 @@ const defaultTasksState = {
   totalPages: 1,
   sorting: [],
   filters: [],
-  statistics: []
+  statistics: [],
 };
 
 function tasksReducer(state, action) {
@@ -18,7 +19,7 @@ function tasksReducer(state, action) {
       totalPages: action.totalPages,
       sorting: state.sorting,
       filters: state.filters,
-      statistics: action.statistics
+      statistics: action.statistics,
     };
   } else if (action.type === "CHANGE_PAGE") {
     return {
@@ -27,7 +28,7 @@ function tasksReducer(state, action) {
       totalPages: state.totalPages,
       sorting: state.sorting,
       filters: state.filters,
-      statistics: state.statistics
+      statistics: state.statistics,
     };
   } else if (action.type === "UPDATE_SORTING") {
     // console.log("updating sorting")
@@ -52,7 +53,7 @@ function tasksReducer(state, action) {
       totalPages: state.totalPages,
       sorting: newSorting,
       filters: state.filters,
-      statistics: state.statistics
+      statistics: state.statistics,
     };
   } else if (action.type === "UPDATE_FILTERS") {
     const newFilters = action.filters.filter(
@@ -65,7 +66,7 @@ function tasksReducer(state, action) {
       totalPages: state.totalPages,
       sorting: state.sorting,
       filters: newFilters,
-      statistics: state.statistics
+      statistics: state.statistics,
     };
   }
 
@@ -88,7 +89,7 @@ export default function TasksProvider({ children }) {
   }, [tasksState.sorting, tasksState.page, tasksState.filters]);
 
   function fetchData() {
-    console.log("fetching data...");
+    //console.log("fetching data...");
     // console.log(tasksState.filters);
     let sortingQueryParams = "&sorting=";
 
@@ -100,7 +101,10 @@ export default function TasksProvider({ children }) {
     });
 
     let urlReq =
-      "http://localhost:8080/todos?pageNumber=" +
+      API_ADDRESS +
+      ":" +
+      PORT +
+      "/todos?pageNumber=" +
       tasksState.page +
       "&pageSize=10";
 
@@ -109,24 +113,32 @@ export default function TasksProvider({ children }) {
     tasksContext.filters.forEach((by) => {
       urlReq += "&" + by.property + "=" + by.value;
     });
-    console.log(urlReq);
+    //console.log(urlReq);
 
     fetch(urlReq, {
       method: "GET",
-      mode: "cors",
+      mode: CORS_MODE,
     })
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        // console.log(data);
-        dispatchTasksAction({
-          type: "SET_LIST",
-          list: data.page.content,
-          page: data.page.number,
-          totalPages: data.page.totalPages,
-          statistics: data.statistics
-        });
+        //console.log(data);
+        if (data.page.empty && !data.page.first) {
+          //console.log("changing page?");
+          dispatchTasksAction({
+            type: "CHANGE_PAGE",
+            page: parseInt(data.page.number) - 1,
+          });
+        } else {
+          dispatchTasksAction({
+            type: "SET_LIST",
+            list: data.page.content,
+            page: data.page.number,
+            totalPages: data.page.totalPages,
+            statistics: data.statistics,
+          });
+        }
       });
   }
 
@@ -148,11 +160,11 @@ export default function TasksProvider({ children }) {
   }
 
   function handleAddTask(task) {
-    let urlReq = "http://localhost:8080/todos";
+    let urlReq = API_ADDRESS + ":" + PORT + "/todos";
     // console.log(task.dueDate);
     fetch(urlReq, {
       method: "POST",
-      mode: "cors",
+      mode: CORS_MODE,
       headers: {
         "Content-Type": "application/json",
       },
@@ -168,11 +180,11 @@ export default function TasksProvider({ children }) {
   }
 
   function handleUpdateTask(task) {
-    let urlReq = "http://localhost:8080/todos/" + task.id;
+    let urlReq = API_ADDRESS + ":" + PORT + "/todos/" + task.id;
     // console.log(task.dueDate);
     fetch(urlReq, {
       method: "PUT",
-      mode: "cors",
+      mode: CORS_MODE,
       headers: {
         "Content-Type": "application/json",
       },
@@ -188,11 +200,11 @@ export default function TasksProvider({ children }) {
   }
 
   function handleMarkTaskAsDone(id) {
-    let urlReq = "http://localhost:8080/todos/" + id + "/done";
+    let urlReq = API_ADDRESS + ":" + PORT + "/todos/" + id + "/done";
     // console.log(task.dueDate);
     fetch(urlReq, {
       method: "PATCH",
-      mode: "cors",
+      mode: CORS_MODE,
       headers: {
         "Content-Type": "application/json",
       },
@@ -207,11 +219,11 @@ export default function TasksProvider({ children }) {
   }
 
   function handleMarkTaskAsPending(id) {
-    let urlReq = "http://localhost:8080/todos/" + id + "/undone";
+    let urlReq = API_ADDRESS + ":" + PORT + "/todos/" + id + "/undone";
     // console.log(task.dueDate);
     fetch(urlReq, {
       method: "PATCH",
-      mode: "cors",
+      mode: CORS_MODE,
       headers: {
         "Content-Type": "application/json",
       },
@@ -226,11 +238,11 @@ export default function TasksProvider({ children }) {
   }
 
   function handleRemoveTask(id) {
-    let urlReq = "http://localhost:8080/todos/" + id;
+    let urlReq = API_ADDRESS + ":" + PORT + "/todos/" + id;
     // console.log(task.dueDate);
     fetch(urlReq, {
       method: "DELETE",
-      mode: "cors",
+      mode: CORS_MODE,
       headers: {
         "Content-Type": "application/json",
       },
