@@ -1,6 +1,7 @@
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useContext } from "react";
 import TasksContext from "./tasks-context";
 import { API_ADDRESS, PORT, CORS_MODE } from "../config/api";
+import LayoutContext from "./layout-context";
 
 const defaultTasksState = {
   list: [],
@@ -37,14 +38,13 @@ function tasksReducer(state, action) {
 
     if (index !== -1) {
       newSorting[index].direction = (newSorting[index].direction + 1) % 3;
-      console.log(newSorting[index].direction);
+      // console.log(newSorting[index].direction);
     } else {
       // console.log(action.property)
       newSorting.push({ property: action.property, direction: 1 });
     }
 
     newSorting = newSorting.filter((by) => by.direction !== 0);
-
     // console.log(newSorting);
 
     return {
@@ -74,6 +74,7 @@ function tasksReducer(state, action) {
 }
 
 export default function TasksProvider({ children }) {
+  const layoutContext = useContext(LayoutContext);
   const [tasksState, dispatchTasksAction] = useReducer(
     tasksReducer,
     defaultTasksState
@@ -171,11 +172,13 @@ export default function TasksProvider({ children }) {
       body: JSON.stringify(task),
     })
       .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        fetchData();
+        if (response.status === 201) {
+          fetchData();
+          layoutContext.hideLastModal();
+        }
+        if (response.status === 400) {
+          layoutContext.doShowInfoModal();
+        }
       });
   }
 
@@ -191,11 +194,13 @@ export default function TasksProvider({ children }) {
       body: JSON.stringify(task),
     })
       .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        fetchData();
+        if (response.status === 200) {
+          fetchData();
+          layoutContext.hideLastModal();
+        }
+        if (response.status === 400) {
+          layoutContext.doShowInfoModal();
+        }
       });
   }
 

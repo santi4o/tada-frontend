@@ -5,6 +5,7 @@ import Table from "./components/Table";
 import Button from "./components/shared/Button";
 import PageNav from "./components/PageNav";
 import TaskModal from "./components/TaskModal";
+import InfoModal from "./components/InfoModal";
 import { useContext } from "react";
 import LayoutContext from "./store/layout-context";
 import TasksContext from "./store/tasks-context";
@@ -46,6 +47,7 @@ function App() {
           <PageNav />
         </div>
         {layoutContext.showTaskModal && <TaskModal />}
+        {layoutContext.showInfoModal && <InfoModal title="OOPS!" message="It seems you already have a To-Do with that name. Try with a different name"/>}
       </Layout>
     </div>
   );

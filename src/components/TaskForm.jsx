@@ -73,7 +73,6 @@ export default function TaskForm() {
           : null,
       });
     }
-    layoutContext.hideTaskModal();
   }
 
   return (

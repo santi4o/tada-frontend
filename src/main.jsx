@@ -7,10 +7,10 @@ import TasksProvider from "./store/TasksProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-  <TasksProvider>
-    <LayoutProvider>
+  <LayoutProvider>
+    <TasksProvider>
       <App />
-    </LayoutProvider>
-  </TasksProvider>
+    </TasksProvider>
+  </LayoutProvider>
   // </React.StrictMode>
 );

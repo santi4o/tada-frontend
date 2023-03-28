@@ -17,6 +17,7 @@ function taskModalReducer(state, action) {
 
 export default function LayoutProvider({ children }) {
   const [darkTheme, setDarkTheme] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
   const [taskModalState, dispatchTaskModalAction] = useReducer(
     taskModalReducer,
     defaultTaskModalState
@@ -49,8 +50,16 @@ export default function LayoutProvider({ children }) {
     dispatchTaskModalAction({ type: "SHOW_MODAL", task });
   }
 
-  function handleHideTaskModal() {
-    dispatchTaskModalAction({ type: "HIDE_MODAL" })
+  function handleHideLastModal() {
+    if (showInfoModal) {
+      setShowInfoModal(false);
+    } else {
+      dispatchTaskModalAction({ type: "HIDE_MODAL" });
+    }
+  }
+
+  function handleShowInfoModal() {
+    setShowInfoModal(true);
   }
 
   if (darkTheme) {
@@ -62,11 +71,13 @@ export default function LayoutProvider({ children }) {
   const layoutContext = {
     dark: darkTheme,
     showTaskModal: taskModalState.show,
+    showInfoModal,
     updatingTask: taskModalState.task,
     handleToggleTheme,
     doShowTaskModal: handleShowTaskModal,
-    hideTaskModal: handleHideTaskModal
-  }
+    doShowInfoModal: handleShowInfoModal,
+    hideLastModal: handleHideLastModal,
+  };
 
   return (
     <LayoutContext.Provider value={layoutContext}>
